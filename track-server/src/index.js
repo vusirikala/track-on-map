@@ -3,11 +3,12 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import { authRouter } from './routes/authRoutes';
 import requireAuth from './middlewares/requireAuth';
-
+import { trackRouter } from './routes/trackRoutes';
 
 const app = express();
 app.use(bodyParser.json());
 app.use(authRouter);
+app.use(trackRouter);
 
 
 app.get('/', (req, res) => {
