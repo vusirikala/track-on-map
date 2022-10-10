@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-
+import mongoose from "mongoose";
 const pointSchema = new mongoose.Schema({
     timestamp: Number,
     coords: {

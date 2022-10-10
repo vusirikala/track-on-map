@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-import Users from '../models/User';
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+import Users from '../models/User.js';
 
 function requireAuth (req, res, next) {
     const {authorization} = req.headers;
@@ -15,7 +15,7 @@ function requireAuth (req, res, next) {
             return res.status(401).send({error: 'You must be logged in'})
         }
         const {userId} = payload;
-        const user = await User.findById(userId);
+        const user = await Users.findById(userId);
         req.user = user;
         next();
     })

@@ -1,9 +1,9 @@
-const express = require('express');
-import mongoose from 'mongoose';
+import express from 'express';
 import bodyParser from 'body-parser';
-import { authRouter } from './routes/authRoutes';
-import requireAuth from './middlewares/requireAuth';
-import { trackRouter } from './routes/trackRoutes';
+import mongoose from 'mongoose';
+import { authRouter } from './routes/authRoutes.js';
+import requireAuth from './middlewares/requireAuth.js';
+import { trackRouter } from './routes/trackRoutes.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -11,7 +11,7 @@ app.use(authRouter);
 app.use(trackRouter);
 
 
-app.get('/', (req, res) => {
+app.get('/', requireAuth, (req, res) => {
     res.send('Hi there!')  
 })
 
@@ -22,8 +22,8 @@ const start = async () =>
         await mongoose.connect(mongoUri);
 
 
-        app.listen(5000, () => {
-            console.log('Listening on port 5000');
+        app.listen(5500, () => {
+            console.log('Listening on port 5500');
         })
     } catch (err) {
         console.error(err);

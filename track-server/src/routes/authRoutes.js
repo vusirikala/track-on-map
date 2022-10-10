@@ -1,15 +1,14 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-
-import Users from '../models/User';
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import Users from '../models/User.js';
 
 const router = express.Router();
 
 router.post('/signup', async (request, response) => {
-    const {email, password} = req.body;
+    const {email, password} = request.body;
     
     try {
-        const user = new User({email, password});
+        const user = new Users({email, password});
         await user.save();
         const token = jwt.sign({userId: user._id}, 'MY_SECRET_KEY');
         response.send({token});
