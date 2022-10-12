@@ -1,13 +1,16 @@
 import React, {useEffect, useContext} from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 
 function ResolveAuthScreen() {
     const {tryLocalSignin} = useContext(AuthContext);
     useEffect(() => {
-        tryLocalSignin()
+        tryLocalSignin();
     }, [])
     return <View style={styles.container}>
+        <NavigationEvents onDidFocus={tryLocalSignin} />
+        <Text>ResolveAuth Screen</Text>
     </View>;
 }
 
