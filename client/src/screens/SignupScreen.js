@@ -1,15 +1,17 @@
 import React, {useContext} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Text} from '@rneui/themed';
-import Spacer from '../components/Spacer';
+import {View, StyleSheet} from 'react-native';
 import { Context as AuthContext } from '../context/AuthContext';
 import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
+import { NavigationEvents } from 'react-navigation';
 
-const SignupScreen = ({navigation}) => {
-    const {state, signup} = useContext(AuthContext);
+const SignupScreen = () => {
+    const {state, signup, clearErrorMessage, tryLocalSignin} = useContext(AuthContext);
 
     return <View style={styles.container}>
+        <NavigationEvents 
+            onWillFocus={clearErrorMessage}  //Called anytime we are about to navigate into the screen
+        />
         <AuthForm 
             headerText="Sign Up for Tracker"
             errorMessage={state.errorMessage}
