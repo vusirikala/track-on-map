@@ -1,12 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import {Text} from '@rneui/themed';
 import Map from '../components/Map';
 import { requestForegroundPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location';
+import { Context as LocationContext} from '../context/LocationContext';
 // import '../_mockLocation';
 
 const TrackCreateScreen = () => {
+    const [err, setErr] = useState(null);
+    const {addLocation} = useContext(LocationContext);
 
     const startWatching = async () => {
         try {
@@ -21,7 +24,8 @@ const TrackCreateScreen = () => {
                 timeInterval: 1000,     //Update once every 1 sec 
                 distanceInterval: 10    //Update once every 10 meters
             }, (location) => {
-                console.log(location)
+                // console.log(location)
+                addLocation(location)
             })
             
         } catch (e) {
