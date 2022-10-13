@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {View, StyleSheet} from 'react-native';
-import {Text, Button, Input} from 'react-native-elements';
+import {Text, Button, Input} from '@rneui/themed';
 import Spacer from "./Spacer";
 
 export default function AuthForm ({headerText, errorMessage, onSubmit, submitButtonText}) {
