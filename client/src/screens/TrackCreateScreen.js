@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-navigation';
 import {Text} from '@rneui/themed';
 import Map from '../components/Map';
 import { requestForegroundPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location';
-import '../_mockLocation';
+// import '../_mockLocation';
 
 const TrackCreateScreen = () => {
 
