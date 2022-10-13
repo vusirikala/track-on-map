@@ -3,7 +3,8 @@ import {View, StyleSheet} from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import {Text} from '@rneui/themed';
 import Map from '../components/Map';
-import { requestForegroundPermissionsAsync } from 'expo-location';
+import { requestForegroundPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location';
+import '../_mockLocation';
 
 const TrackCreateScreen = () => {
 
@@ -11,8 +12,18 @@ const TrackCreateScreen = () => {
         try {
             const { granted } = await requestForegroundPermissionsAsync();
             if (!granted) {
-            throw new Error('Location permission not granted');
-          }
+                throw new Error('Location permission not granted');
+            }
+
+            //This method is going to watch user's location and see a change over time. 
+            await watchPositionAsync({
+                accuracy: Accuracy.BestForNavigation,   //How accuracy do we want in the location. More accuracy means consumes higher battery power. 
+                timeInterval: 1000,     //Update once every 1 sec 
+                distanceInterval: 10    //Update once every 10 meters
+            }, (location) => {
+                console.log(location)
+            })
+            
         } catch (e) {
           setErr(e);
         }
