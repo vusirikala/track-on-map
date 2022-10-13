@@ -1,16 +1,15 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, withNavigationFocus } from 'react-navigation';
 import {Text} from '@rneui/themed';
 import Map from '../components/Map';
-import { requestForegroundPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location';
 import { Context as LocationContext} from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
 // import '../_mockLocation';
 
-const TrackCreateScreen = () => {
+const TrackCreateScreen = ({isFocused}) => {
     const {addLocation} = useContext(LocationContext);
-    const [err] = useLocation(addLocation);
+    const [err] = useLocation(isFocused, addLocation);
 
     //Safe Arew View makes sure that we leave some space at the top of the mobile and use only the middle area.  
     return <SafeAreaView forceInset={{top : 'always'}}>
@@ -23,4 +22,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default TrackCreateScreen;
+export default withNavigationFocus(TrackCreateScreen);
