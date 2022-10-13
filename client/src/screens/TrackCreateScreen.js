@@ -18,6 +18,10 @@ const TrackCreateScreen = () => {
         }
       };
 
+    useEffect(() => {
+        startWatching();
+    }, [])
+
     //Safe Arew View makes sure that we leave some space at the top of the mobile and use only the middle area.  
     return <SafeAreaView forceInset={{top : 'always'}}>
         <Text h3>Create a Track</Text>
