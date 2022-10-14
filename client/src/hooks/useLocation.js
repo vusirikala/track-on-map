@@ -33,10 +33,8 @@ function useLocation (shouldTrack, callback) {
     
 
         if (shouldTrack) {
-            console.log("Start watching")
             startWatching();
         } else {
-            console.log("Stop watching")
             if (subscriber) {
                 subscriber.remove();
             }
@@ -45,7 +43,6 @@ function useLocation (shouldTrack, callback) {
 
         //This function is called the next time useEffect is called. 
         return () => {
-            console.log("Subscriber removed 1")
             if (subscriber) {
                 subscriber.remove();
                 subscriber = null;
