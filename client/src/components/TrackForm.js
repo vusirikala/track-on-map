@@ -21,7 +21,7 @@ function TrackForm () {
         }
         {
             !recording && locations.length
-                ? (<Button title="Save Recording" onPress={() => saveTrack(name, locations)}/>)
+                ? (<Button title="Save Recording" onPress={saveTrack}/>)
                 : null
         }
     </View>;
