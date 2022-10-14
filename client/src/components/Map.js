@@ -24,7 +24,7 @@ function Map () {
     //     <Polyline coordinates={points}/>
     // </MapView>
 
-    const {state : {currentLocation}} = useContext(LocationContext);
+    const {state : {currentLocation, locations}} = useContext(LocationContext);
     
     if (!currentLocation) {
         //This is a spinner to show loading. 
@@ -50,6 +50,7 @@ function Map () {
             strokeColor="rgba(158,158,255,1.0)"     //This is the border color. 4th value is the opacity. 
             fillColor="rgba(158,158,255,0.3)"
         />
+        <Polyline coordinates={locations.map(loc => loc.coords)} />
     </MapView>
 
 
