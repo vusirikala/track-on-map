@@ -9,7 +9,7 @@ const locationReducer = (state, action) => {
         case 'stop_recording':
             return {...state, recording: false};
         case 'add_location': 
-            return {...state, locations: [...state.location, action.payload]};
+            return {...state, locations: [...state.locations, action.payload]};
         case 'change_name': 
             return {...state, name: action.payload};
         default: 
@@ -18,25 +18,25 @@ const locationReducer = (state, action) => {
 }
 
 function changeName (dispatch) {
-    return async (name) => {
+    return (name) => {
         dispatch({type: "change_name", payload: name})
     }
 }
 
 function startRecording (dispatch) {
-    return async () => {
+    return () => {
         dispatch({type: 'start_recording'})
     }
 }
 
 function stopRecording (dispatch) {
-    return async () => {
+    return () => {
         dispatch({type: 'stop_recording'})
     }
 }
 
 function addLocation (dispatch) {
-    return async (location, recording) => {
+    return (location, recording) => {
         dispatch({type: 'add_current_location', payload: location})
         if (recording) {
             dispatch({type: 'add_location', payload: location})    

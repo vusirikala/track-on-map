@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useCallback, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import { SafeAreaView, withNavigationFocus } from 'react-navigation';
 import {Text} from '@rneui/themed';
@@ -10,9 +10,15 @@ import TrackForm from '../components/TrackForm';
 
 const TrackCreateScreen = ({isFocused}) => {
     const {state, addLocation} = useContext(LocationContext);
-    const [err] = useLocation(isFocused, (location) => {
-        addLocation(location, state.recording)
-    });
+    
+    //Creates a new callback only when state.recording changes. 
+    //useCallback simply returns the callback function passed as the first argument, whenever the second argument changes.  
+    //When the second argument doesn't change, but the first argument changes, the useCallback will still return the old callback (not the new one). 
+    const callback = useCallback( (location) => {
+       addLocation(location, state.recording)
+    }, [state.recording]);
+
+    const [err] = useLocation(isFocused || state.recording, callback);
 
     //Safe Arew View makes sure that we leave some space at the top of the mobile and use only the middle area.  
     return <SafeAreaView forceInset={{top : 'always'}}>
